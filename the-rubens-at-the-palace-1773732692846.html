@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rubens at the Palace</title>
+<meta name="description" content="A haven of luxury where history, comfort, and impeccable service converge for an unforgettable stay in the heart of London, celebrating 18th-century roots with warm and traditional British hospitality.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf8f4;
+  --warm: #f4f0ea;
+  --dark: #18181b;
+  --dark2: #232326;
+  --gold: #c9a96e;
+  --goldl: #e8d5b0;
+  --muted: #6b6b6b;
+  --border: #e2ddd6;
+  --text: #1c1917;
+  --text2: #3d3a37;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--cream); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  background: rgba(24,24,27,0.96); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease;
+}
+.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: #fff; letter-spacing: 0.3px; }
+.nav-links { display: flex; gap: 40px; }
+.nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,169,110,0.6); padding: 9px 22px; transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+/* HERO */
+.hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden; background: var(--dark);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center center;
+  opacity: 0.52; transform: scale(1.04); transition: transform 9s ease-out;
+}
+.hero-bg.loaded { transform: scale(1); }
+.hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(16,16,18,0.96) 0%, rgba(16,16,18,0.4) 45%, rgba(16,16,18,0.08) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 64px 80px; max-width: 920px; }
+.hero-eye {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 22px;
+}
+.hero-eye::before { content: ''; width: 36px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7.5vw, 96px); font-weight: 300; line-height: 0.93;
+  color: #fff; margin-bottom: 28px; letter-spacing: -1.5px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px; font-style: italic; font-weight: 300;
+  color: rgba(255,255,255,0.65); margin-bottom: 56px; max-width: 580px; line-height: 1.5;
+}
+.hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+.h-stat { display: flex; flex-direction: column; gap: 5px; }
+.h-stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 300; color: var(--gold); line-height: 1;
+}
+.h-stat-l { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.hero-scroll { position: absolute; bottom: 44px; right: 64px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.hero-scroll span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.scroll-line { width: 1px; height: 52px; background: rgba(255,255,255,0.12); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold); animation: sd 2.2s ease-in-out infinite;
+}
+@keyframes sd { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+/* INFO BAR */
+.info-bar { background: var(--dark2); display: flex; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.info-item {
+  flex: 1; min-width: 180px; padding: 22px 36px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.info-item:last-child { border-right: none; }
+.info-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.info-value { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.55; }
+.info-value a { color: var(--goldl); border-bottom: 1px solid rgba(232,213,176,0.35); }
+
+/* LAYOUT */
+.wrap { padding: 100px 64px; max-width: 1400px; margin: 0 auto; }
+.bg-warm { background: var(--warm); }
+.bg-dark { background: var(--dark); }
+.sec-head { margin-bottom: 60px; }
+.eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4.5vw, 56px); font-weight: 300; line-height: 1.02;
+  color: var(--text); letter-spacing: -0.5px;
+}
+.sec-title.on-dark { color: #fff; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: start; }
+.about-body { }
+.about-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px; font-weight: 300; line-height: 1.72; color: var(--text2); margin-bottom: 28px;
+}
+.about-pos {
+  font-size: 14px; line-height: 1.85; color: var(--muted);
+  padding: 24px 0 0; border-top: 1px solid var(--border);
+}
+.about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.about-photos img { width: 100%; height: 210px; object-fit: cover; }
+.about-photos img:first-child { grid-column: 1 / -1; height: 300px; }
+
+/* GALLERY */
+.gallery { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 2px; }
+.gallery::-webkit-scrollbar { height: 2px; }
+.gallery::-webkit-scrollbar-thumb { background: var(--gold); }
+.gallery img { flex-shrink: 0; width: 300px; height: 210px; object-fit: cover; }
+
+/* SPACES */
+.spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.space-card { background: #fff; overflow: hidden; }
+.space-img { overflow: hidden; }
+.space-img img { width: 100%; height: 268px; object-fit: cover; transition: transform 0.65s ease; }
+.space-card:hover .space-img img { transform: scale(1.05); }
+.space-no-img {
+  height: 220px; background: var(--warm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ccc;
+}
+.space-photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.space-photo-strip img { width: 100%; height: 88px; object-fit: cover; }
+.space-body { padding: 30px 34px 36px; }
+.space-type { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.space-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 12px; line-height: 1.05; }
+.space-desc { font-size: 13px; line-height: 1.78; color: var(--muted); margin-bottom: 16px; }
+.space-hours {
+  font-size: 12px; color: var(--muted); line-height: 1.65; font-style: italic;
+  border-left: 2px solid var(--goldl); padding-left: 13px; margin-bottom: 18px;
+}
+.menu-links { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.menu-link {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 13px; border: 1px solid var(--border); color: var(--muted); transition: all 0.2s;
+}
+.menu-link:hover { border-color: var(--gold); color: var(--gold); }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 12px 26px; border: 1px solid var(--dark); color: var(--dark); transition: all 0.22s;
+}
+.btn::after { content: '→'; transition: transform 0.22s; }
+.btn:hover { background: var(--dark); color: #fff; }
+.btn:hover::after { transform: translateX(5px); }
+.btn-gold { border-color: var(--gold); color: var(--gold); }
+.btn-gold::after { content: '→'; }
+.btn-gold:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+/* EXPERIENCES */
+.exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.exp-card {
+  position: relative; overflow: hidden; background: var(--warm);
+  min-height: 380px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.exp-card img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.65s ease;
+}
+.exp-card:hover img { transform: scale(1.07); }
+.exp-overlay {
+  position: relative; z-index: 2; padding: 26px;
+  background: linear-gradient(transparent 0%, rgba(16,16,18,0.9) 100%); color: #fff;
+}
+.exp-light {
+  position: relative; z-index: 2; padding: 32px;
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.exp-tag {
+  display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,169,110,0.45);
+  padding: 3px 10px; margin-bottom: 10px;
+}
+.exp-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+.exp-desc {
+  font-size: 12px; line-height: 1.6; opacity: 0.72; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.exp-avail { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.exp-link {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px; display: inline-block; transition: all 0.2s;
+}
+.exp-link:hover { color: var(--gold); border-color: var(--gold); }
+.exp-light .exp-name { color: var(--text); }
+.exp-light .exp-desc { color: var(--muted); opacity: 1; }
+.exp-light .exp-link { color: var(--text2); border-color: var(--border); }
+.exp-light .exp-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* OFFERS */
+.offers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.offer-card {
+  padding: 38px 44px; background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; transition: border-color 0.3s;
+}
+.offer-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: var(--gold); }
+.offer-card:hover { border-color: rgba(201,169,110,0.25); }
+.offer-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 12px; }
+.offer-desc { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+
+/* PRODUCTS */
+.prod-group { margin-bottom: 56px; }
+.prod-group:last-child { margin-bottom: 0; }
+.prod-cat-title {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.prod-cat-title::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.prod-card {
+  padding: 24px 28px; background: #fff; border: 1px solid var(--border); transition: border-color 0.2s, transform 0.2s;
+}
+.prod-card:hover { border-color: var(--goldl); transform: translateY(-2px); }
+.prod-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: 6px; }
+.prod-price { font-size: 12px; font-weight: 500; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.3px; }
+.prod-desc { font-size: 12px; line-height: 1.72; color: var(--muted); }
+
+/* LOCAL AREA */
+.local-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.ltab {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 11px 22px; cursor: pointer; color: var(--muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s;
+}
+.ltab.active { color: var(--text); border-bottom-color: var(--gold); }
+.ltab:hover { color: var(--text); }
+.lpanel { display: none; }
+.lpanel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+.local-card {
+  padding: 22px 24px; background: #fff; border: 1px solid var(--border); transition: border-color 0.2s;
+}
+.local-card:hover { border-color: var(--goldl); }
+.local-badge {
+  display: inline-block; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); background: var(--warm); padding: 2px 9px; margin-bottom: 9px;
+}
+.local-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; margin-bottom: 5px; }
+.local-addr { font-size: 11px; color: #aaa; margin-bottom: 8px; letter-spacing: 0.3px; }
+.local-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 13px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.local-link {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold);
+  border-bottom: 1px solid rgba(201,169,110,0.35); padding-bottom: 1px; display: inline-block;
+}
+
+/* FOOTER */
+.footer { background: #0d0d0f; color: #fff; padding: 88px 64px 48px; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 72px;
+  margin-bottom: 72px; padding-bottom: 72px; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 10px; line-height: 1; }
+.footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--gold); margin-bottom: 24px; }
+.footer-address { font-size: 13px; line-height: 1.95; color: rgba(255,255,255,0.42); }
+.footer-col h4 { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 22px; }
+.footer-links { display: flex; flex-direction: column; gap: 11px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.social-link { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.social-link:hover { color: var(--gold); }
+.socials-col { display: flex; flex-direction: column; gap: 11px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-badge { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+.footer-site { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .spaces-grid { grid-template-columns: repeat(2,1fr); }
+  .exp-grid { grid-template-columns: repeat(2,1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .wrap { padding: 64px 20px; }
+  .hero-content { padding: 0 24px 60px; }
+  .spaces-grid, .exp-grid, .offers-grid { grid-template-columns: 1fr; }
+  .footer { padding: 56px 20px 36px; }
+  .footer-top { grid-template-columns: 1fr; gap: 36px; }
+  .info-item { min-width: 50%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <span class="nav-brand">The Rubens at the Palace</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#dining">Dining</a>
+    <a href="#exp">Experiences</a>
+    <a href="#offers">Offers</a>
+    
+  </div>
+  <a href="https://rubenshotel.com" target="_blank" class="nav-cta">Visit Website</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg" style="background-image:url('https://prod-media.redcarnationhotels.com/media/iozjaisp/the-rubens-at-the-palace-exterior.jpg')"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <p class="hero-eye">Hotel Profile</p>
+    <h1 class="hero-title">The Rubens at the Palace</h1>
+    <p class="hero-sub">A royal London stay</p>
+    <div class="hero-stats"><div class="h-stat"><span class="h-stat-n">5</span><span class="h-stat-l">Dining Venues</span></div><div class="h-stat"><span class="h-stat-n">31</span><span class="h-stat-l">Experiences</span></div><div class="h-stat"><span class="h-stat-n">3</span><span class="h-stat-l">Offers</span></div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-item"><span class="info-label">Address</span><span class="info-value">39 Buckingham Palace Road, London, SW1W 0PS</span></div>
+  <div class="info-item"><span class="info-label">Phone</span><span class="info-value"><a href="tel:+44 (0)20 7834 6600">+44 (0)20 7834 6600</a></span></div>
+  <div class="info-item"><span class="info-label">Email</span><span class="info-value"><a href="mailto:bookrb@rubenshotel.com">bookrb@rubenshotel.com</a></span></div>
+  
+  <div class="info-item"><span class="info-label">Website</span><span class="info-value"><a href="https://rubenshotel.com" target="_blank">rubenshotel.com</a></span></div>
+</div>
+
+<!-- ABOUT -->
+
+<section id="about">
+<div class="wrap">
+  <div class="about-grid">
+    <div class="about-body">
+      <div class="sec-head">
+        <p class="eyebrow">About</p>
+        <h2 class="sec-title">The Rubens at the Palace</h2>
+      </div>
+      <p class="about-text">A warm welcome to The Rubens at the Palace, part of The Red Carnation Hotel Collection. Located directly opposite the Royal Mews at Buckingham Palace, just a five-minute walk from Victoria Station. Steeped in history and stood on a site that was, in the 18th-century, part of the grounds of Buckingham Palace, The Rubens at the Palace stands as a living testament to its storied past.</p>
+      <p class="about-pos">A haven of luxury where history, comfort, and impeccable service converge for an unforgettable stay in the heart of London, celebrating 18th-century roots with warm and traditional British hospitality.</p>
+    </div>
+    <div class="about-photos"><img src="https://prod-media.redcarnationhotels.com/media/2lfcrwft/the-rubens-exterior-with-doorman-team.jpg" alt="The Rubens at the Palace" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/zvenfi5v/the-rubens-at-the-place-exterior-with-carriage.jpg" alt="The Rubens at the Palace" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/cnzfzyxk/the-living-wall-at-the-rubens.jpg" alt="The Rubens at the Palace" loading="lazy"></div>
+  </div>
+</div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery"><img src="https://prod-media.redcarnationhotels.com/media/iozjaisp/the-rubens-at-the-palace-exterior.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/2lfcrwft/the-rubens-exterior-with-doorman-team.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/zvenfi5v/the-rubens-at-the-place-exterior-with-carriage.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/cnzfzyxk/the-living-wall-at-the-rubens.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/2orf1siz/rubens-english-grill-food-hc.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/yztjjgw3/english-grill-interior-hc.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/31ff3xhc/rubens0458low.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/aljfmqxr/the-rubens-rembrandt-suite.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/w0kkbz1u/rubens-new-york-bar-ice-for-cocktails-4.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/g0gbcowl/rubens0226rlow.jpg" loading="lazy"></div>
+
+<!-- DINING -->
+
+<section id="dining" class="bg-warm">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Dining &amp; Spaces</p>
+    <h2 class="sec-title">Where to eat &amp; drink</h2>
+  </div>
+  <div class="spaces-grid"><div class="space-card"><div class="space-img"><img src="https://prod-media.redcarnationhotels.com/media/2orf1siz/rubens-english-grill-food-hc.jpg" alt="The English Grill" loading="lazy"></div><div class="space-photo-strip"><img src="https://prod-media.redcarnationhotels.com/media/yztjjgw3/english-grill-interior-hc.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/31ff3xhc/rubens0458low.jpg" loading="lazy"></div><div class="space-body"><p class="space-type">Restaurant</p><h3 class="space-name">The English Grill</h3><p class="space-desc">Proudly holding two AA Rosettes, The English Grill stands as a beacon of culinary excellence with signature British classics, expertly grilled steaks from charcoal-fired Josper Grill and seasonal plant-based delights. The iconic Beef Wellington is a signature dish. Glass wall overlooking the pass allows guests to witness culinary artistry. Extensive wine list and champagne trolley.</p><p class="space-hours">Breakfast: Monday-Friday 6:30am-10:30am, Saturday 7am-11am, Sunday 7am-11:30am. Lunch: Tuesday-Friday 12:30pm-2:30pm (closed until 1st April 2026). Dinner: Tuesday-Friday 5:30pm-9:30pm, Saturday 6:30pm-9:30pm</p><div class="menu-links"><a href="https://shared.xara.com/WRF3CDgZgj" target="_blank" class="menu-link">Breakfast Menu</a><a href="https://shared.xara.com/lbzS6eCSI2" target="_blank" class="menu-link">Lunch Menu</a><a href="https://shared.xara.com/if8fwIFx9f" target="_blank" class="menu-link">Early Evening Set Menu</a><a href="https://shared.xara.com/4epEYNeKRD" target="_blank" class="menu-link">A la Carte Menu</a><a href="https://shared.xara.com/gbLgNbd1AL" target="_blank" class="menu-link">Dessert Menu</a><a href="https://shared.xara.com/NjT1W8UdMu" target="_blank" class="menu-link">Wine List</a></div><a href="https://rubenshotel.com/dining-and-drinks/the-english-grill" target="_blank" class="btn">Book a table</a></div></div><div class="space-card"><div class="space-img"><img src="https://prod-media.redcarnationhotels.com/media/w0kkbz1u/rubens-new-york-bar-ice-for-cocktails-4.jpg" alt="The New York Bar" loading="lazy"></div><div class="space-body"><p class="space-type">Bar</p><h3 class="space-name">The New York Bar</h3><p class="space-desc">Timeless elegance with classic sophistication. Featured cocktail is the Negroni, crafted with precision and care. Open for dining with light bites, indulgent sandwiches, and comforting specialties.</p><a href="https://rubenshotel.com/dining-and-drinks/the-new-york-bar" target="_blank" class="btn">Reserve</a></div></div><div class="space-card"><div class="space-img"><div class="space-no-img">Restaurant</div></div><div class="space-body"><p class="space-type">Restaurant</p><h3 class="space-name">The Curry Room</h3><p class="space-desc">Offers Indian flavours and dining experiences.</p></div></div><div class="space-card"><div class="space-img"><img src="https://prod-media.redcarnationhotels.com/media/waiiy45v/rubens-sarah-houghting-vegetables-2.jpg" alt="The Leopard Bar" loading="lazy"></div><div class="space-body"><p class="space-type">Bar</p><h3 class="space-name">The Leopard Bar</h3><p class="space-desc">One of the hotel's bars for drinks and celebration.</p></div></div><div class="space-card"><div class="space-img"><div class="space-no-img">Lounge</div></div><div class="space-body"><p class="space-type">Lounge</p><h3 class="space-name">Palace Lounge</h3><p class="space-desc">Beautiful lounge overlooking the Royal Mews. Venue for Royal Afternoon Tea.</p><a href="https://rubenshotel.com/dining-and-drinks/afternoon-tea" target="_blank" class="btn">Book a table</a></div></div></div>
+</div>
+</section>
+
+<!-- EXPERIENCES -->
+
+<section id="exp">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Experiences</p>
+    <h2 class="sec-title">Things to do</h2>
+  </div>
+  <div class="exp-grid"><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/2xin02et/rubens-beef-wellington-1.jpg" alt="Ben Kelliher's Beef Wellington" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Culinary Experience</span><h3 class="exp-name">Ben Kelliher's Beef Wellington</h3><p class="exp-desc">Join a one-hour cooking class mastering Beef Wellington, with champagne, canapés, and a three-course dinner.</p><p class="exp-avail">Tuesday to Saturday</p><a href="https://rubenshotel.com/experiences/ben-kelliher-s-beef-wellington" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/jq5dxtkm/rubens-egg-salmon-and-avo.jpg" alt="Weekend Brunch" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Dining</span><h3 class="exp-name">Weekend Brunch</h3><p class="exp-desc">Leisurely brunch at The English Grill with pancakes, mimosas and coffee, moments from London's icons.</p><p class="exp-avail">Weekends</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/weekend-brunch" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/ybghbrb1/shutterstock193998872.jpg" alt="Borough Market Experience" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Culinary Experience</span><h3 class="exp-name">Borough Market Experience</h3><p class="exp-desc">Design a bespoke seven-course menu with our Executive Chef, sourcing ingredients at Borough Market.</p><a href="https://rubenshotel.com/experiences/borough-market-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/oswp5y5u/rubens-picnic-basket-5.jpg" alt="Picnic Hampers" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Dining</span><h3 class="exp-name">Picnic Hampers</h3><p class="exp-desc">Our meticulously curated picnic baskets are brimming with an exquisite array of culinary delights.</p><p class="exp-avail">April to September</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/picnic-hampers" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/ryebmdej/the-high-tea-in-the-palace-lounge.jpg" alt="Private Dining & Business Entertaining" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Event Services</span><h3 class="exp-name">Private Dining & Business Entertaining</h3><p class="exp-desc">The English Grill offers elegant private rooms for business entertaining, celebrations, and bespoke events with generous spacing between tables, attentive yet discreet service, and a calm, composed atmosphere.</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/5kxcjp1b/rubens-chef-kumar-1.jpg" alt="Gourmet Chef Experience" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Culinary Experience</span><h3 class="exp-name">Gourmet Chef Experience</h3><p class="exp-desc">Created by Chef Kumar, this experience involves guests watching chefs prep whilst enjoying a glass of champagne and canapés. Afterwards, indulge in a three-course gourmet experience which incorporates dishes from our celebrated menu chosen to your taste and carefully paired wine by our Head Sommelier.</p><p class="exp-avail">Thursday to Monday</p><a href="https://rubenshotel.com/experiences/arun-kumars-gourmet-chef-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/oi1hw3jm/london-theatre.jpg" alt="Pre-Theatre Dining Offer" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Dining Offer</span><h3 class="exp-name">Pre-Theatre Dining Offer</h3><p class="exp-desc">We're delighted to offer ticket holders for Six The Musical, Wicked, and Hamilton a 15% saving on pre-theatre dining at any of our welcoming bars and restaurants.</p><a href="https://rubenshotel.com/experiences/pre-theatre-offer" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/t3bgc4zz/rubens-gin-experience-display-with-botanicals.jpg" alt="Guided Gin Tasting Experience" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Guided Gin Tasting Experience</h3><p class="exp-desc">Sample three carefully selected gins ranging from dry to citrus to spiced, accompanied by a selection of complementary tonic water pairings. Alongside your gin and tonic tasting, enjoy a sharing platter showcasing four plates of your choice from the menu.</p><a href="https://rubenshotel.com/experiences/guided-gin-tasting-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Cocktails & Snacks</h3><p class="exp-desc">Enjoy an indulgent and personalised cocktail experience. Choose two cocktails from our cocktail menu, which will be expertly prepared by our talented bar team, alongside four plates from our small plates menu.</p><a href="https://rubenshotel.com/experiences/cocktails-and-snacks" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/lq3msxs2/rubens0369low.jpg" alt="Pre-Theatre Set Menu at The New York Bar" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Dining</span><h3 class="exp-name">Pre-Theatre Set Menu at The New York Bar</h3><p class="exp-desc">Enjoy a pre-theatre menu of delightful light bites, sharing stands, main courses, and desserts to make your evening one to remember.</p><p class="exp-avail">4 to 6.45pm</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/nyb-pre-theatre" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">The Negroni Trolley Experience</h3><p class="exp-desc">Your bespoke Negroni trolley is wheeled to your table, where our mixologist creates each cocktail before your eyes, adapting flavours, aromatics, and balance to suit your preferences.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/the-negroni-trolley-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Immersive Cocktail Masterclass Experience</h3><p class="exp-desc">Join an expert mixologist in the New York Bar, as you master your very own recipes. During the experience, you'll enjoy a glass of champagne before making two cocktails of your choice - an experience made complete with four of our small plates.</p><a href="https://rubenshotel.com/experiences/immersive-cocktail-masterclass-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Sabrage Champagne Experience</h3><p class="exp-desc">Embark on an exciting one-hour champagne experience where you will witness the art of sabrage - the ceremonial technique of opening a bottle with a sabre. As you enjoy your bottle of champagne, sample four plates of your choice from our small plates menu.</p><p class="exp-avail">Bookings must allow one day's notice</p><a href="https://rubenshotel.com/experiences/sabrage-champagne-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/jezk4o2o/the-rubens-whisky-experience.jpg" alt="Guided Whisky Tasting Experience" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Guided Whisky Tasting Experience</h3><p class="exp-desc">Join our resident whisky expert on a tour of innovative and exciting, premium range whiskies, including tasting and nosing guidance. Enjoy three sensational tastings from full, fruity single malts to deep peat flavours. Each whisky voyage is accompanied by a sharing platter of four plates of your choice from the menu.</p><a href="https://rubenshotel.com/experiences/guided-whisky-tasting-experience" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/tnqhmspl/eg-at.jpg" alt="Royal Afternoon Tea" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Royal Afternoon Tea</h3><p class="exp-desc">Indulge in the epitome of a quintessential English Afternoon Tea experience at The Rubens at the Palace. Immerse yourself in the charming ambiance of our Palace Lounge, offering panoramic views of the Royal Mews of Buckingham Palace, or enjoy your tea within the opulent surroundings of our exquisitely designed English Grill. We honour the classic British tradition while infusing innovative twists. Catering for diverse dietary preferences with vegetarian, vegan, gluten-free, and halal choices.</p><p class="exp-avail">Monday to Friday: 12 to 5pm, Saturdays: 12 to 6pm, Sunday: 12 to 5pm</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Royal Champagne Tea</h3><p class="exp-desc">Add a touch of sparkle to a timeless tradition with our Champagne Afternoon Tea in Westminster. Enjoy savoury sandwiches, freshly baked scones with clotted cream and preserves, handcrafted pastries, and a chilled glass of Champagne per guest, served in the elegant Palace Lounge overlooking the Royal Mews of Buckingham Palace. A premium non-alcoholic sparkling alternative is available.</p><p class="exp-avail">Monday to Friday: 12 to 5pm, Saturdays: 12 to 6pm, Sunday: 12 to 5pm</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Children's Afternoon Tea</h3><p class="exp-desc">Our Prince and Princess Afternoon Tea includes bite-size sandwiches, freshly baked scones, pastries, and a choice of milkshake, hot chocolate, tea or soft drink. If you are staying with us, we also offer a children's Pastry Chef Experience for children under 12.</p><p class="exp-avail">Monday to Friday: 12 to 5pm, Saturdays: 12 to 6pm, Sunday: 12 to 5pm</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Vegan Afternoon Tea</h3><p class="exp-desc">At The Rubens at the Palace, vegan afternoon tea is treated with the same ceremony, creativity, and indulgence as its traditional counterpart. Carefully crafted by the hotel's pastry and culinary teams, the Vegan Afternoon Tea is a polished celebration of flavour, seasonality, and thoughtful sourcing, set just moments from Buckingham Palace.</p><p class="exp-avail">Monday to Friday: 12 to 5pm, Saturdays: 12 to 6pm, Sunday: 12 to 5pm</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Tea Takeaway</h3><p class="exp-desc">The Rubens is delighted to offer guests the chance to enjoy our Royal Afternoon Tea wherever they choose with our exclusive takeaway service. Whether you're meeting friends in a nearby park, surprising a loved one, or indulging at the office, our afternoon tea caddy allows you to savour our exquisite selection of sandwiches, pastries, and freshly baked scones wherever you are.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/tea-takeaway" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Easter Royal Afternoon Tea</h3><p class="exp-desc">Celebrate the season with a special Easter Afternoon Tea at The Rubens at the Palace, a charming springtime twist on the hotel's much-loved royal tea experience.</p><p class="exp-avail">Sunday 5th April</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/easter-afternoon-tea" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Winter Afternoon Tea Offer</h3><p class="exp-desc">For a limited time, enjoy Royal Afternoon Tea at The Rubens at the Palace for £52.50 per person midweek.</p><p class="exp-avail">January - March</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/seasonal-afternoon-tea-offer" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Bridal Afternoon Tea</h3><p class="exp-desc">Celebrate your upcoming wedding with an enchanting Bridal Afternoon Tea. Delight in the elegant atmosphere as you savour bridal-themed delicacies, creating unforgettable memories as you toast to the bride-to-be amidst the refined ambiance of our distinguished venue.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/bridal-afternoon-tea" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Baby Shower Afternoon Tea</h3><p class="exp-desc">Celebrate your baby shower at The Rubens with a unique and memorable Baby Shower Afternoon Tea. Share this joyous occasion with your loved ones and enjoy baby shower-themed biscuits alongside our classic Royal Afternoon Tea offering.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/baby-shower-afternoon-tea" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/ryebmdej/the-high-tea-in-the-palace-lounge.jpg" alt="Golden Tips Tea" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Golden Tips Tea</h3><p class="exp-desc">Enjoy our Royal Afternoon Tea for two alongside Ceylon Golden Tips, in partnership with specialist tea merchants PMD Tea. This rare tea is produced in the highlands of Sri Lanka and is skillfully handpicked at sunset. With white-glove service, this delicate tea is weighed with precision at The Rubens using golden scales; each tip is placed into the silver teapot individually with golden tweezers.</p><a href="https://rubenshotel.com/experiences/golden-tips-tea" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Afternoon Tea Parties</h3><p class="exp-desc">We are delighted to welcome guests celebrating a special occasion. Parties can be held in the Palace Lounge for up to eight guests, one of our private rooms, or the English Grill, which can accommodate up to 100 guests. Our dedicated events team will be on hand to help organise every detail.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/afternoon-tea-parties" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Vegetarian Afternoon Tea</h3><p class="exp-desc">Our Vegetarian Afternoon Tea includes a tempting selection of vegetarian finger sandwiches, traditional scones served with homemade seasonal preserves and clotted cream, and a variety of vegetarian pastries and cakes.</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Halal Afternoon Tea</h3><p class="exp-desc">Our Halal Afternoon Tea makes a few subtle ingredient substitutions, allowing you to enjoy the full Afternoon Tea experience. Our menu is inspired by our royal history and connections, including regal pastries such as 'The Crown'.</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Afternoon Tea</span><h3 class="exp-name">Gluten-Free Afternoon Tea</h3><p class="exp-desc">Our Gluten-Free Afternoon Tea is suitable for coeliacs, with each of our finger sandwiches served on gluten-free bread. Our Gluten-Free Afternoon Tea makes substitutions like for like, so guests won't miss out on any of our delicious taste combinations.</p><a href="https://bookings.designmynight.com/book" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Wellness</span><h3 class="exp-name">Aire Ancient Baths</h3><p class="exp-desc">Thanks to our partnership with Aire Ancient Baths, a wellness brand dedicated to the art of relaxation, you're able to enjoy a range of complimentary treats when you book their 45-minute Ancient Relaxing Massage. To enhance your experience with cava, truffles, and hydrogel cooling eye patches, all you have to do is quote RUBENSVIP when making your booking.</p><p class="exp-avail">May 2025 to March 2026</p><a href="https://beaire.com/en/aire-ancient-baths-london/experiencias/241/ancient-relaxing-massage-45" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Beverage Experience</span><h3 class="exp-name">Wine and Beer Flights</h3><p class="exp-desc">Elevate your experience with our carefully prepared wine and beer flights. Choose any three wines from our sister vineyard, Bouchard Finlayson, or select three beers from our menu, and enjoy a drinks pairing unlike any other.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/wine-and-beer-flights" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><div class="exp-light"><span class="exp-tag">Dining</span><h3 class="exp-name">Pre-Theatre Dining Cocktails</h3><p class="exp-desc">Pre-theatre dining with cocktails experience.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/pre-theatre-dining-cocktails" target="_blank" class="exp-link">Book now</a></div></div></div>
+</div>
+</section>
+
+<!-- OFFERS -->
+
+<section id="offers" class="bg-dark">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Offers &amp; Packages</p>
+    <h2 class="sec-title on-dark">Special rates &amp; deals</h2>
+  </div>
+  <div class="offers-grid"><div class="offer-card"><h3 class="offer-name">Winter Afternoon Tea Offer</h3><p class="offer-desc">For a limited time, enjoy Royal Afternoon Tea at The Rubens at the Palace for £52.50 per person midweek.</p><a href="https://rubenshotel.com/dining-and-drinks/whats-on/seasonal-afternoon-tea-offer" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Pre-Theatre Dining Offer</h3><p class="offer-desc">We're delighted to offer ticket holders for Six The Musical, Wicked, and Hamilton a 15% saving on pre-theatre dining at any of our welcoming bars and restaurants.</p><a href="https://rubenshotel.com/experiences/pre-theatre-offer" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Aire Ancient Baths Offer</h3><p class="offer-desc">Enjoy a range of complimentary treats when you book their 45-minute Ancient Relaxing Massage. To enhance your experience with cava, truffles, and hydrogel cooling eye patches, quote RUBENSVIP when making your booking, available until March 2026.</p><a href="https://beaire.com/en/aire-ancient-baths-london/experiencias/241/ancient-relaxing-massage-45" target="_blank" class="btn btn-gold">View offer</a></div></div>
+</div>
+</section>
+
+<!-- SERVICES -->
+
+<section id="services" class="bg-warm">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Services</p>
+    <h2 class="sec-title">What we offer</h2>
+  </div>
+  <div class="prod-group"><p class="prod-cat-title">Afternoon Tea</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Royal Afternoon Tea</h4><p class="prod-price">From £70 per person</p><p class="prod-desc">A delectable assortment of freshly baked scones, delicate finger sandwiches and delicate pastries including signature crown made with vanilla cheesecake, mango, passionfruit curd, and coconut sponge.</p></div><div class="prod-card"><h4 class="prod-name">Royal Champagne Tea</h4><p class="prod-price">From £90</p><p class="prod-desc">Savoury sandwiches, freshly baked scones with clotted cream and preserves, handcrafted pastries, and a chilled glass of Champagne per guest, served in the elegant Palace Lounge overlooking the Royal Mews of Buckingham Palace. A premium non-alcoholic sparkling alternative is available.</p></div><div class="prod-card"><h4 class="prod-name">Children's Afternoon Tea</h4><p class="prod-price">£45 per child under 12</p><p class="prod-desc">Our Prince and Princess Afternoon Tea includes bite-size sandwiches, freshly baked scones, pastries, and a choice of milkshake, hot chocolate, tea or soft drink.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Gift Vouchers</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Gift Vouchers - The Curry Room</h4><p class="prod-desc">Purchase gift vouchers for The Curry Room.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Wellness</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Wellness Treatments</h4><p class="prod-desc">In partnership with London Serenity, we are pleased to offer either a massage or beauty treatment for guests to enjoy within the comfort of their room or suite at The Rubens at the Palace.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Fitness</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">City Athletic Day Pass</h4><p class="prod-desc">Exclusive preferential rate on day passes at City Athletic Victoria. This premium fitness club features state-of-the-art equipment, expert personal trainers, and a wide range of dynamic classes.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Restaurant</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">The Curry Room</h4><p class="prod-desc">A la carte menu and exceptional thali featuring authentic Indian flavours, meticulously prepared with the finest ingredients and exclusively imported spices from India. The restaurant features Rajasthani hand embroidery and rich red hues, reflecting the vibrant diversity of the dishes served. Holds two AA Rosettes and earned a TripAdvisor Travellers' Choice Award in 2023.</p></div><div class="prod-card"><h4 class="prod-name">The English Grill</h4><p class="prod-desc">Fine dining restaurant with a selection of elegant private rooms available for business entertaining, celebrations, and bespoke events.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Bar</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">The New York Bar</h4><p class="prod-desc">Distinguished venue in the heart of London Victoria celebrated for its striking red décor, original artwork, and welcoming ambiance. Features expertly crafted cocktails, tasting experiences, and a signature champagne trolley. Comprehensive cocktail menu, bar menu showcasing tantalising light bites, indulgent sandwiches, and comforting specialties.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Lounge</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Palace Lounge</h4><p class="prod-desc">Charming ambiance offering panoramic views of the Royal Mews of Buckingham Palace, ideal for afternoon tea.</p></div></div></div>
+</div>
+</section>
+
+<!-- LOCAL AREA -->
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <h2 class="footer-brand-name">The Rubens at the Palace</h2>
+      <p class="footer-tagline">A royal London stay</p>
+      <p class="footer-address">
+        39 Buckingham Palace Road, London, SW1W 0PS<br>
+        +44 (0)20 7834 6600<br>
+        bookrb@rubenshotel.com
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#dining">Dining</a>
+        <a href="#exp">Experiences</a>
+        <a href="#offers">Offers</a>
+        <a href="#services">Services</a>
+        
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-links">
+        <a href="tel:+44 (0)20 7834 6600">+44 (0)20 7834 6600</a>
+        <a href="mailto:bookrb@rubenshotel.com">bookrb@rubenshotel.com</a>
+        <a href="https://rubenshotel.com" target="_blank">rubenshotel.com</a>
+      </div>
+      
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-badge">Generated by Hotel Manager &middot; 2026</span>
+    <span class="footer-site">https://rubenshotel.com</span>
+  </div>
+</footer>
+
+<script>
+// Hero parallax load
+window.addEventListener('load', () => {
+  const bg = document.getElementById('heroBg');
+  if (bg) bg.classList.add('loaded');
+});
+
+// Nav hide/show on scroll
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 80) {
+    nav.style.transform = y > lastY ? 'translateY(-100%)' : 'translateY(0)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastY = y;
+}, { passive: true });
+
+// Local area tabs
+function switchTab(cat) {
+  document.querySelectorAll('.ltab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(t => { if (t.textContent === cat) t.classList.add('active'); });
+  const panel = document.getElementById('panel-' + cat);
+  if (panel) panel.classList.add('active');
+}
+</script>
+
+</body>
+</html>
