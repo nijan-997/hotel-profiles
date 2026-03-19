@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Montague on the Gardens</title>
+<meta name="description" content="Seven private Georgian Grade II listed townhouses, originally constructed in 1806, form what is now the beautiful Montague on the Gardens hotel, located opposite the British Museum and surrounded by a tranquil private garden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #faf8f4;
+  --warm: #f4f0ea;
+  --dark: #18181b;
+  --dark2: #232326;
+  --gold: #c9a96e;
+  --goldl: #e8d5b0;
+  --muted: #6b6b6b;
+  --border: #e2ddd6;
+  --text: #1c1917;
+  --text2: #3d3a37;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--cream); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  background: rgba(24,24,27,0.96); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s ease;
+}
+.nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: #fff; letter-spacing: 0.3px; }
+.nav-links { display: flex; gap: 40px; }
+.nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,169,110,0.6); padding: 9px 22px; transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+/* HERO */
+.hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden; background: var(--dark);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center center;
+  opacity: 0.52; transform: scale(1.04); transition: transform 9s ease-out;
+}
+.hero-bg.loaded { transform: scale(1); }
+.hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(16,16,18,0.96) 0%, rgba(16,16,18,0.4) 45%, rgba(16,16,18,0.08) 100%);
+}
+.hero-content { position: relative; z-index: 2; padding: 0 64px 80px; max-width: 920px; }
+.hero-eye {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 22px;
+}
+.hero-eye::before { content: ''; width: 36px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7.5vw, 96px); font-weight: 300; line-height: 0.93;
+  color: #fff; margin-bottom: 28px; letter-spacing: -1.5px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px; font-style: italic; font-weight: 300;
+  color: rgba(255,255,255,0.65); margin-bottom: 56px; max-width: 580px; line-height: 1.5;
+}
+.hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+.h-stat { display: flex; flex-direction: column; gap: 5px; }
+.h-stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 300; color: var(--gold); line-height: 1;
+}
+.h-stat-l { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.hero-scroll { position: absolute; bottom: 44px; right: 64px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.hero-scroll span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.scroll-line { width: 1px; height: 52px; background: rgba(255,255,255,0.12); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold); animation: sd 2.2s ease-in-out infinite;
+}
+@keyframes sd { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+/* INFO BAR */
+.info-bar { background: var(--dark2); display: flex; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.info-item {
+  flex: 1; min-width: 180px; padding: 22px 36px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.info-item:last-child { border-right: none; }
+.info-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.info-value { font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.55; }
+.info-value a { color: var(--goldl); border-bottom: 1px solid rgba(232,213,176,0.35); }
+
+/* LAYOUT */
+.wrap { padding: 100px 64px; max-width: 1400px; margin: 0 auto; }
+.bg-warm { background: var(--warm); }
+.bg-dark { background: var(--dark); }
+.sec-head { margin-bottom: 60px; }
+.eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 4.5vw, 56px); font-weight: 300; line-height: 1.02;
+  color: var(--text); letter-spacing: -0.5px;
+}
+.sec-title.on-dark { color: #fff; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: start; }
+.about-body { }
+.about-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px; font-weight: 300; line-height: 1.72; color: var(--text2); margin-bottom: 28px;
+}
+.about-pos {
+  font-size: 14px; line-height: 1.85; color: var(--muted);
+  padding: 24px 0 0; border-top: 1px solid var(--border);
+}
+.about-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.about-photos img { width: 100%; height: 210px; object-fit: cover; }
+.about-photos img:first-child { grid-column: 1 / -1; height: 300px; }
+
+/* GALLERY */
+.gallery { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 2px; }
+.gallery::-webkit-scrollbar { height: 2px; }
+.gallery::-webkit-scrollbar-thumb { background: var(--gold); }
+.gallery img { flex-shrink: 0; width: 300px; height: 210px; object-fit: cover; }
+
+/* SPACES */
+.spaces-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.space-card { background: #fff; overflow: hidden; }
+.space-img { overflow: hidden; }
+.space-img img { width: 100%; height: 268px; object-fit: cover; transition: transform 0.65s ease; }
+.space-card:hover .space-img img { transform: scale(1.05); }
+.space-no-img {
+  height: 220px; background: var(--warm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ccc;
+}
+.space-photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.space-photo-strip img { width: 100%; height: 88px; object-fit: cover; }
+.space-body { padding: 30px 34px 36px; }
+.space-type { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.space-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 12px; line-height: 1.05; }
+.space-desc { font-size: 13px; line-height: 1.78; color: var(--muted); margin-bottom: 16px; }
+.space-hours {
+  font-size: 12px; color: var(--muted); line-height: 1.65; font-style: italic;
+  border-left: 2px solid var(--goldl); padding-left: 13px; margin-bottom: 18px;
+}
+.menu-links { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.menu-link {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 13px; border: 1px solid var(--border); color: var(--muted); transition: all 0.2s;
+}
+.menu-link:hover { border-color: var(--gold); color: var(--gold); }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 12px 26px; border: 1px solid var(--dark); color: var(--dark); transition: all 0.22s;
+}
+.btn::after { content: '→'; transition: transform 0.22s; }
+.btn:hover { background: var(--dark); color: #fff; }
+.btn:hover::after { transform: translateX(5px); }
+.btn-gold { border-color: var(--gold); color: var(--gold); }
+.btn-gold::after { content: '→'; }
+.btn-gold:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+/* EXPERIENCES */
+.exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.exp-card {
+  position: relative; overflow: hidden; background: var(--warm);
+  min-height: 380px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.exp-card img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.65s ease;
+}
+.exp-card:hover img { transform: scale(1.07); }
+.exp-overlay {
+  position: relative; z-index: 2; padding: 26px;
+  background: linear-gradient(transparent 0%, rgba(16,16,18,0.9) 100%); color: #fff;
+}
+.exp-light {
+  position: relative; z-index: 2; padding: 32px;
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.exp-tag {
+  display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,169,110,0.45);
+  padding: 3px 10px; margin-bottom: 10px;
+}
+.exp-name { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+.exp-desc {
+  font-size: 12px; line-height: 1.6; opacity: 0.72; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.exp-avail { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.exp-link {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px; display: inline-block; transition: all 0.2s;
+}
+.exp-link:hover { color: var(--gold); border-color: var(--gold); }
+.exp-light .exp-name { color: var(--text); }
+.exp-light .exp-desc { color: var(--muted); opacity: 1; }
+.exp-light .exp-link { color: var(--text2); border-color: var(--border); }
+.exp-light .exp-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* OFFERS */
+.offers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.offer-card {
+  padding: 38px 44px; background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; transition: border-color 0.3s;
+}
+.offer-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: var(--gold); }
+.offer-card:hover { border-color: rgba(201,169,110,0.25); }
+.offer-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 12px; }
+.offer-desc { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+
+/* PRODUCTS */
+.prod-group { margin-bottom: 56px; }
+.prod-group:last-child { margin-bottom: 0; }
+.prod-cat-title {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.prod-cat-title::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.prod-card {
+  padding: 24px 28px; background: #fff; border: 1px solid var(--border); transition: border-color 0.2s, transform 0.2s;
+}
+.prod-card:hover { border-color: var(--goldl); transform: translateY(-2px); }
+.prod-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: 6px; }
+.prod-price { font-size: 12px; font-weight: 500; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.3px; }
+.prod-desc { font-size: 12px; line-height: 1.72; color: var(--muted); }
+
+/* LOCAL AREA */
+.local-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.ltab {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 11px 22px; cursor: pointer; color: var(--muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s;
+}
+.ltab.active { color: var(--text); border-bottom-color: var(--gold); }
+.ltab:hover { color: var(--text); }
+.lpanel { display: none; }
+.lpanel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; }
+.local-card {
+  padding: 22px 24px; background: #fff; border: 1px solid var(--border); transition: border-color 0.2s;
+}
+.local-card:hover { border-color: var(--goldl); }
+.local-badge {
+  display: inline-block; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); background: var(--warm); padding: 2px 9px; margin-bottom: 9px;
+}
+.local-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; margin-bottom: 5px; }
+.local-addr { font-size: 11px; color: #aaa; margin-bottom: 8px; letter-spacing: 0.3px; }
+.local-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 13px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.local-link {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold);
+  border-bottom: 1px solid rgba(201,169,110,0.35); padding-bottom: 1px; display: inline-block;
+}
+
+/* FOOTER */
+.footer { background: #0d0d0f; color: #fff; padding: 88px 64px 48px; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 72px;
+  margin-bottom: 72px; padding-bottom: 72px; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 10px; line-height: 1; }
+.footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--gold); margin-bottom: 24px; }
+.footer-address { font-size: 13px; line-height: 1.95; color: rgba(255,255,255,0.42); }
+.footer-col h4 { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 22px; }
+.footer-links { display: flex; flex-direction: column; gap: 11px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.social-link { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.social-link:hover { color: var(--gold); }
+.socials-col { display: flex; flex-direction: column; gap: 11px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-badge { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+.footer-site { font-size: 12px; color: rgba(255,255,255,0.18); }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .spaces-grid { grid-template-columns: repeat(2,1fr); }
+  .exp-grid { grid-template-columns: repeat(2,1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .wrap { padding: 64px 20px; }
+  .hero-content { padding: 0 24px 60px; }
+  .spaces-grid, .exp-grid, .offers-grid { grid-template-columns: 1fr; }
+  .footer { padding: 56px 20px 36px; }
+  .footer-top { grid-template-columns: 1fr; gap: 36px; }
+  .info-item { min-width: 50%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <span class="nav-brand">The Montague on the Gardens</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#dining">Dining</a>
+    <a href="#exp">Experiences</a>
+    <a href="#offers">Offers</a>
+    <a href="#area">Area</a>
+  </div>
+  <a href="https://montaguehotel.com" target="_blank" class="nav-cta">Visit Website</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg" style="background-image:url('https://prod-media.redcarnationhotels.com/media/zh1coas3/the-montague-on-the-gardens-exterior.jpg')"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <p class="hero-eye">Hotel Profile</p>
+    <h1 class="hero-title">The Montague on the Gardens</h1>
+    <p class="hero-sub">Classic British hospitality</p>
+    <div class="hero-stats"><div class="h-stat"><span class="h-stat-n">4</span><span class="h-stat-l">Dining Venues</span></div><div class="h-stat"><span class="h-stat-n">4</span><span class="h-stat-l">Experiences</span></div><div class="h-stat"><span class="h-stat-n">7</span><span class="h-stat-l">Offers</span></div><div class="h-stat"><span class="h-stat-n">4</span><span class="h-stat-l">Local Picks</span></div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-item"><span class="info-label">Address</span><span class="info-value">15 Montague Street, London, WC1B 5BJ</span></div>
+  <div class="info-item"><span class="info-label">Phone</span><span class="info-value"><a href="tel:+44 (0)20 7637 1001">+44 (0)20 7637 1001</a></span></div>
+  <div class="info-item"><span class="info-label">Email</span><span class="info-value"><a href="mailto:bookmt@montaguehotel.com">bookmt@montaguehotel.com</a></span></div>
+  
+  <div class="info-item"><span class="info-label">Website</span><span class="info-value"><a href="https://montaguehotel.com" target="_blank">montaguehotel.com</a></span></div>
+</div>
+
+<!-- ABOUT -->
+
+<section id="about">
+<div class="wrap">
+  <div class="about-grid">
+    <div class="about-body">
+      <div class="sec-head">
+        <p class="eyebrow">About</p>
+        <h2 class="sec-title">The Montague on the Gardens</h2>
+      </div>
+      <p class="about-text">Nestled in the heart of London, The Montague on the Gardens is a proud part of The Red Carnation Hotel Collection, perfectly positioned near Covent Garden, the West End's premier theatres, and world-class shopping. Just steps from the British Museum, we are renowned for our al fresco dining experiences and wonderfully fun pop-ups. Enjoy live jazz at our chic Leopard Bar or savour a traditional Afternoon Tea in the conservatory overlooking peaceful gardens.</p>
+      <p class="about-pos">Seven private Georgian Grade II listed townhouses, originally constructed in 1806, form what is now the beautiful Montague on the Gardens hotel, located opposite the British Museum and surrounded by a tranquil private garden.</p>
+    </div>
+    <div class="about-photos"><img src="https://prod-media.redcarnationhotels.com/media/2t4b23je/montague-ski-lodge-6.jpeg" alt="The Montague on the Gardens" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/sqefi4kk/montague-christmas-winter-lodge-1.jpeg" alt="The Montague on the Gardens" loading="lazy"></div>
+  </div>
+</div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery"><img src="https://prod-media.redcarnationhotels.com/media/zh1coas3/the-montague-on-the-gardens-exterior.jpg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/2t4b23je/montague-ski-lodge-6.jpeg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/sqefi4kk/montague-christmas-winter-lodge-1.jpeg" loading="lazy"><img src="https://prod-media.redcarnationhotels.com/media/om0ptmfh/montagueonthegardens-9602.jpg" loading="lazy"></div>
+
+<!-- DINING -->
+
+<section id="dining" class="bg-warm">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Dining &amp; Spaces</p>
+    <h2 class="sec-title">Where to eat &amp; drink</h2>
+  </div>
+  <div class="spaces-grid"><div class="space-card"><div class="space-img"><img src="https://prod-media.redcarnationhotels.com/media/2vtfde55/rubens-children-afternoon-tea-1-1.jpg" alt="Afternoon Tea" loading="lazy"></div><div class="space-body"><p class="space-type">Dining</p><h3 class="space-name">Afternoon Tea</h3><p class="space-desc">Traditional Afternoon Tea service with warmly baked scones, delicious cakes, and freshly hand-cut sandwiches, served in the conservatory overlooking peaceful gardens or in the tearoom.</p><p class="space-hours">Daily: 1 to 5pm</p><div class="menu-links"><a href="https://shared.xara.com/bRjneaeUtU" target="_blank" class="menu-link">Traditional Afternoon Tea</a><a href="" target="_blank" class="menu-link">Children's Afternoon Tea</a></div><a href="https://montaguehotel.com/dining-and-drinks/afternoon-tea" target="_blank" class="btn">Book a table</a></div></div><div class="space-card"><div class="space-img"><div class="space-no-img">Restaurant</div></div><div class="space-body"><p class="space-type">Restaurant</p><h3 class="space-name">The Blue Door Bistro</h3><p class="space-desc">Restaurant offering a delightful dining experience with a menu featuring modern British cuisine. Known for its seasonal dishes and classic comfort food with charming ambiance and elegant decor.</p><a href="https://montaguehotel.com/dining-and-drinks/the-blue-door-bistro" target="_blank" class="btn">Book a table</a></div></div><div class="space-card"><div class="space-img"><div class="space-no-img">Bar</div></div><div class="space-body"><p class="space-type">Bar</p><h3 class="space-name">Leopard Bar</h3><p class="space-desc">Chic bar featuring live jazz</p></div></div><div class="space-card"><div class="space-img"><div class="space-no-img">Wellness</div></div><div class="space-body"><p class="space-type">Wellness</p><h3 class="space-name">Fitness Room</h3><p class="space-desc">Modest fitness room with two Peloton bikes and a treadmill.</p></div></div></div>
+</div>
+</section>
+
+<!-- EXPERIENCES -->
+
+<section id="exp">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Experiences</p>
+    <h2 class="sec-title">Things to do</h2>
+  </div>
+  <div class="exp-grid"><div class="exp-card"><img src="https://www.1rebel.com/uk/studio/holborn" alt="Reshape & Reformer Pilates at 1Rebel Holborn" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Fitness</span><h3 class="exp-name">Reshape & Reformer Pilates at 1Rebel Holborn</h3><p class="exp-desc">At Holborn you'll find Reshape, 1Rebel's most gruelling workout and Reformer Pilates. Prepare to be mentally and physically challenged and leave with surplus endorphins.</p><a href="https://www.1rebel.com/uk/studio/holborn" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://www.1rebel.com/uk/studio/holborn" alt="Afternoon Tea" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Dining</span><h3 class="exp-name">Afternoon Tea</h3><p class="exp-desc">Indulge in the quintessential British experience with our Afternoon Tea. Relish a selection of finely crafted sandwiches, freshly baked scones, and exquisite pastries. Don't miss this timeless tradition, perfect for a leisurely afternoon treat or a special occasion.</p><a href="https://montaguehotel.com/dining-and-drinks/afternoon-tea" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/2t4b23je/montague-ski-lodge-6.jpeg" alt="Sustainable Cooking Masterclass" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Culinary</span><h3 class="exp-name">Sustainable Cooking Masterclass</h3><p class="exp-desc">Curated in partnership with The Cookery School, enjoy our Sustainable Cooking Masterclass. From recreating restaurant favourites to conquering the basics, learn how to create and cook your very own sustainable meal from scratch.</p><a href="https://montaguehotel.com/experiences" target="_blank" class="exp-link">Book now</a></div></div><div class="exp-card"><img src="https://prod-media.redcarnationhotels.com/media/5sln3ehe/the-milestone-wedding17.jpg" alt="Children's Mocktail Masterclasses" loading="lazy"><div class="exp-overlay"><span class="exp-tag">Family Activity</span><h3 class="exp-name">Children's Mocktail Masterclasses</h3><p class="exp-desc">Children's mocktail masterclasses available as part of children's amenities.</p></div></div></div>
+</div>
+</section>
+
+<!-- OFFERS -->
+
+<section id="offers" class="bg-dark">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Offers &amp; Packages</p>
+    <h2 class="sec-title on-dark">Special rates &amp; deals</h2>
+  </div>
+  <div class="offers-grid"><div class="offer-card"><h3 class="offer-name">Kids Stay Free</h3><p class="offer-desc">Children under twelve years old can stay and dine with the hotel for free when sharing a room with parents.</p><a href="https://montaguehotel.com/offers/kids-go-free" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Bayeux Tapestry Stay</h3><p class="offer-desc">A refined overnight package pairing historic discovery with classic British hospitality. Includes an overnight stay for two people, full English breakfast, two tickets to the Bayeux Tapestry exhibition, a French Martini for each guest, and a selection of delicate French macarons. Available September 2026 - June 2027.</p><a href="https://montaguehotel.com/bayeux-tapestry-waitlist" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Celebrations Package</h3><p class="offer-desc">Perfect for birthdays, baby showers, bridal showers, or general parties with family and friends.</p><a href="https://montaguehotel.com/meetings-and-events/celebrations-package" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Ski Lodge Drinks Reception</h3><p class="offer-desc">Exclusive use of the outdoor Ski Lodge and adjacent indoor Conservatory space. Includes welcome glass of mulled wine, spiced cider or alcohol-free festive punch, 10 item festive inspired floating buffet, three hours of unlimited house wine, bottled beer and soft drinks, festive background music, cloakroom facilities, personalised event signage, and full event management.</p><a href="https://montaguehotel.com/event-enquiry" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Ski Lodge Bratwurst & Pretzel Package</h3><p class="offer-desc">Arrival glass of mulled wine, spiced cider or non-alcoholic festive punch, Bratwurst & Pretzel station with garnishes on arrival, 4-item festive inspired floating buffet with meat, fish, vegetarian, and dessert options, 1 glass of prosecco or 2 bottled beers per person, cloakroom facilities, and full event management.</p><a href="https://montaguehotel.com/event-enquiry" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Ski Lodge Daytime Sit Down Experience</h3><p class="offer-desc">Exclusive use of outdoor Ski Lodge and adjacent indoor Conservatory space. Welcome glass of mulled wine, spiced cider or alcohol-free festive punch, three course festive menu served in the Great Russell Suite, half a bottle of sommelier selected wine per person, half a bottle of mineral water per person, tea, coffee and mince pies, complimentary white chair covers, Christmas novelties and crackers, festive centrepieces, festive background music, personalised event signage, and full event management. Price: £115 per person for 10 to 110 guests.</p><a href="https://montaguehotel.com/event-enquiry" target="_blank" class="btn btn-gold">View offer</a></div><div class="offer-card"><h3 class="offer-name">Ski Lodge Evening Experience</h3><p class="offer-desc">Welcome reception of mulled wine, spiced cider & festive punch lasting 45 minutes. Price: £150 per person for 10 to 110 guests.</p><a href="https://montaguehotel.com/event-enquiry" target="_blank" class="btn btn-gold">View offer</a></div></div>
+</div>
+</section>
+
+<!-- SERVICES -->
+
+<section id="services" class="bg-warm">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Services</p>
+    <h2 class="sec-title">What we offer</h2>
+  </div>
+  <div class="prod-group"><p class="prod-cat-title">Beverages</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Smoky Maple Cocktail</h4><p class="prod-desc">Signature cocktail made using Makers Mark Whiskey, maple syrup, and apricot brandy & bitters, served in the atmospheric Leopard Bar.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Accommodation</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Classic Double Rooms</h4><p class="prod-desc">Rooms featuring bespoke amenities and plush bedspreads, offering a perfect blend of comfort and sophistication.</p></div><div class="prod-card"><h4 class="prod-name">The Bloomsbury Set Suite</h4><p class="prod-desc">A combination of the Bedford and Guv'nor's Suites, perfect for groups. Includes three double bedrooms, additional space for two children, four marble bathrooms, private street entrance, entrance hall and foyer, one kitchen, one breakfast room, and relaxed sitting area.</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Pet Services</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Pet Bed</h4><p class="prod-desc">Pet bed available in various sizes.</p></div><div class="prod-card"><h4 class="prod-name">Dog Goody Bag</h4><p class="prod-desc">Contains a toy, treats and clean up bags.</p></div><div class="prod-card"><h4 class="prod-name">Dog Sitting</h4><p class="prod-desc">Dog sitting service available, book 48-hours in advance.</p></div><div class="prod-card"><h4 class="prod-name">Dog Walking</h4><p class="prod-desc">Dog walking service available, book 24-hours in advance.</p></div><div class="prod-card"><h4 class="prod-name">Grooming Service</h4><p class="prod-desc">Pet grooming service available, book 48-hours in advance.</p></div><div class="prod-card"><h4 class="prod-name">Pet Accommodation</h4><p class="prod-price">£50 per night</p><p class="prod-desc">Hotel welcomes well-behaved pets with additional charge of £50 per night (does not apply to service dogs).</p></div></div></div><div class="prod-group"><p class="prod-cat-title">Concierge Services</p><div class="prod-grid"><div class="prod-card"><h4 class="prod-name">Babysitting Service</h4><p class="prod-desc">Guest services team can assist with making babysitting arrangements during your stay. Available at an additional charge and bookable in advance.</p></div></div></div>
+</div>
+</section>
+
+<!-- LOCAL AREA -->
+
+<section id="area">
+<div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Local Area</p>
+    <h2 class="sec-title">Nearby &amp; recommended</h2>
+  </div>
+  <div class="local-tabs">
+    <span class="ltab active" onclick="switchTab('All')">All</span>
+    <span class="ltab" onclick="switchTab('Museum')">Museum</span><span class="ltab" onclick="switchTab('Park')">Park</span><span class="ltab" onclick="switchTab('Garden')">Garden</span>
+  </div>
+  <div class="lpanel active" id="panel-All"><div class="local-card"><span class="local-badge">Museum</span><h4 class="local-name">British Museum</h4><p class="local-addr">Bloomsbury, London</p><p class="local-desc">The British Museum has a permanent collection of around eight million works in the fields of human history, art, and culture. From the Elgin Marbles of Greece and the Rosetta Stone of Egypt, be sure to stop by this cultural icon in Bloomsbury.</p><a href="https://www.britishmuseum.org/about-us/press/press-releases/bayeux-tapestry-displayed-british-museum" target="_blank" class="local-link">Visit &rarr;</a></div><div class="local-card"><span class="local-badge">Park</span><h4 class="local-name">Russell Square</h4><p class="local-addr">Bloomsbury, London</p><p class="local-desc">Nearby square ideal for strolls, picnics and outdoor adventures.</p></div><div class="local-card"><span class="local-badge">Park</span><h4 class="local-name">Regent's Park</h4><p class="local-addr">London</p><p class="local-desc">Park for picnics and outdoor adventures, slightly longer journey from the hotel.</p></div><div class="local-card"><span class="local-badge">Garden</span><h4 class="local-name">Kensington Palace Gardens</h4><p class="local-addr">Kensington, London</p><p class="local-desc">Stunning photo opportunities location near The Milestone Hotel.</p></div></div>
+  <div class="lpanel" id="panel-Museum"><div class="local-card"><h4 class="local-name">British Museum</h4><p class="local-addr">Bloomsbury, London</p><p class="local-desc">The British Museum has a permanent collection of around eight million works in the fields of human history, art, and culture. From the Elgin Marbles of Greece and the Rosetta Stone of Egypt, be sure to stop by this cultural icon in Bloomsbury.</p><a href="https://www.britishmuseum.org/about-us/press/press-releases/bayeux-tapestry-displayed-british-museum" target="_blank" class="local-link">Visit &rarr;</a></div></div><div class="lpanel" id="panel-Park"><div class="local-card"><h4 class="local-name">Russell Square</h4><p class="local-addr">Bloomsbury, London</p><p class="local-desc">Nearby square ideal for strolls, picnics and outdoor adventures.</p></div><div class="local-card"><h4 class="local-name">Regent's Park</h4><p class="local-addr">London</p><p class="local-desc">Park for picnics and outdoor adventures, slightly longer journey from the hotel.</p></div></div><div class="lpanel" id="panel-Garden"><div class="local-card"><h4 class="local-name">Kensington Palace Gardens</h4><p class="local-addr">Kensington, London</p><p class="local-desc">Stunning photo opportunities location near The Milestone Hotel.</p></div></div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <h2 class="footer-brand-name">The Montague on the Gardens</h2>
+      <p class="footer-tagline">Classic British hospitality</p>
+      <p class="footer-address">
+        15 Montague Street, London, WC1B 5BJ<br>
+        +44 (0)20 7637 1001<br>
+        bookmt@montaguehotel.com
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#dining">Dining</a>
+        <a href="#exp">Experiences</a>
+        <a href="#offers">Offers</a>
+        <a href="#services">Services</a>
+        <a href="#area">Local Area</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="footer-links">
+        <a href="tel:+44 (0)20 7637 1001">+44 (0)20 7637 1001</a>
+        <a href="mailto:bookmt@montaguehotel.com">bookmt@montaguehotel.com</a>
+        <a href="https://montaguehotel.com" target="_blank">montaguehotel.com</a>
+      </div>
+      
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-badge">Generated by Hotel Manager &middot; 2026</span>
+    <span class="footer-site">https://montaguehotel.com</span>
+  </div>
+</footer>
+
+<script>
+// Hero parallax load
+window.addEventListener('load', () => {
+  const bg = document.getElementById('heroBg');
+  if (bg) bg.classList.add('loaded');
+});
+
+// Nav hide/show on scroll
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 80) {
+    nav.style.transform = y > lastY ? 'translateY(-100%)' : 'translateY(0)';
+  } else {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastY = y;
+}, { passive: true });
+
+// Local area tabs
+function switchTab(cat) {
+  document.querySelectorAll('.ltab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ltab').forEach(t => { if (t.textContent === cat) t.classList.add('active'); });
+  const panel = document.getElementById('panel-' + cat);
+  if (panel) panel.classList.add('active');
+}
+</script>
+
+</body>
+</html>
